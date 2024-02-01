@@ -1,0 +1,70 @@
+### Login
+< {%
+    const user = "admin"
+    const pwd = "123456"
+    const pwd_md5 = crypto.md5().updateWithText(pwd).digest().toHex()
+    client.log(`_pwd:${pwd} _md5:${pwd_md5}`)
+    request.variables.set("username", user)
+    request.variables.set("password", pwd_md5)
+%}
+POST {{eurekaUrl}}/{{baseServer}}/sys/authorizing/loginNoCode
+Accept: application/json
+Content-Type: application/json
+
+{
+  "queryParam": "7dvigeEzuegG1687941034990",
+  "username": "{{username}}",
+  "password": "{{password}}",
+  "code": "3757"
+}
+
+> {%
+    import * as utils from "./libs/common.js";
+    utils.test(response,"用户登录")
+    utils.findLoginToken(response)
+%}
+
+### Login - Common Js
+< {%
+    import * as utils from "./libs/common.js";
+    const user = "admin"
+    const pwd = "123456"
+    const pwd_md5 = utils.md5(pwd)
+    client.log(`_pwd:${pwd} _md5:${pwd_md5}`)
+    request.variables.set("username", user)
+    request.variables.set("password", pwd_md5)
+%}
+POST {{eurekaUrl}}/{{baseServer}}/sys/authorizing/loginNoCode
+Accept: application/json
+Content-Type: application/json
+
+{
+  "queryParam": "7dvigeEzuegG1687941034990",
+  "username": "{{username}}",
+  "password": "{{password}}",
+  "code": "3757"
+}
+
+> {%
+    import * as utils from "./libs/common.js";
+    utils.test(response,"用户登录")
+    utils.setLoginToken(response, 'userToken')
+%}
+
+### Upload
+POST http://localhost:8189/dietc/sys/source/upload
+Content-Type: multipart/form-data; boundary=WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: {{userToken}}
+
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="moduleName"
+Content-Type: text/plain
+
+safeInfo
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="20230726144000.png"
+Content-Type: image/png
+
+< C:\Users\rains\Pictures\微信截图_20230726144000.png
+--WebKitFormBoundary7MA4YWxkTrZu0gW--
+

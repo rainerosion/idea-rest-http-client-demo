@@ -1,0 +1,43 @@
+### GET Request
+GET https://api.rainss.cn/x-player/api/palyerlist.php?id=8537354683
+Accept: application/json
+
+### POST Request
+POST https://api.rainss.cn/restful/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "url": "https://rainss.cn",
+  "title": "rainerosion"
+}
+
+### PUT Request
+PUT https://api.rainss.cn/restful/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "url": "https://rainss.cn",
+  "title": "rainerosion"
+}
+
+### DELETE Request
+DELETE https://api.rainss.cn/restful/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "url": "https://rainss.cn",
+  "title": "rainerosion"
+}
+
+### PATCH Request
+PATCH https://api.rainss.cn/restful/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "url": "https://rainss.cn",
+  "title": "rainerosion"
+}
